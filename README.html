@@ -1,115 +1,110 @@
-<!DOCTYPE html>
-<html lang="fa">
+<!DOCTYPE html><html lang="fa">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>سامانه استعلام وضعیت وام ازدواج</title>
-<style>
-  body {
-    font-family: Tahoma, sans-serif;
-    background-color: #f0f4f8;
-    text-align: center;
-    padding: 30px;
-    direction: rtl;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  header {
-    margin-bottom: 20px;
-  }
-  header img {
-    width: 100px;
-    height: auto;
-  }
-  input[type="text"] {
-    font-size: 18px;
-    padding: 10px;
-    width: 300px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 15px;
-  }
-  button {
-    font-size: 18px;
-    padding: 10px 25px;
-    background-color: #470434;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-  }
-  button:hover {
-    background-color: #93103e;
-  }
-  .result {
-    margin-top: 30px;
-    font-size: 20px;
-    font-weight: bold;
-    color: #333;
-  }
-  .error {
-    color: red;
-  }
-  footer {
-    margin-top: auto;
-    padding: 15px;
-    background-color: #d9e7ff;
-    font-size: 16px;
-    color: #b4980c;
-    border-top: 1px solid #ffea00;
-    margin-top: 40px;
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دوره تابستانه شهید نصرالله</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Vazirmatn', sans-serif;
+      background: linear-gradient(to bottom, #f2efe6, #d4cfc3);
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+    }
+    header {
+      background-color: #4b3f2f;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      animation: fadeIn 2s ease-in-out;
+    }
+    nav {
+      text-align: center;
+      margin: 1rem;
+    }
+    nav button {
+      background-color: #4b3f2f;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      margin: 0 0.5rem;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    section {
+      margin: 2rem;
+      animation: slideUp 1.5s ease-in-out;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+    }
+    th, td {
+      border: 1px solid #aaa;
+      padding: 0.75rem;
+      text-align: center;
+    }
+    th {
+      background-color: #4b3f2f;
+      color: white;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;} to {opacity: 1;}
+    }
+    @keyframes slideUp {
+      from {transform: translateY(30px); opacity: 0;} to {transform: translateY(0); opacity: 1;}
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <h1>دوره تابستانه شهید نصرالله</h1>
+  </header>  <nav>
+    <button onclick="switchLang('fa')">فارسی</button>
+    <button onclick="switchLang('ar')">العربیة</button>
+  </nav>  <section id="report">
+    <h2>گزارش دوره</h2>
+    <p>این بخش شامل خلاصه‌ای از فعالیت‌های انجام شده در دوره تابستانه شهید نصرالله است...</p>
+  </section>  <section id="scores">
+    <h2>لیست امتیازات</h2>
+    <table>
+      <tr>
+        <th>نام و نام خانوادگی</th>
+        <th>امتیاز</th>
+        <th>میزان حضور</th>
+      </tr>
+      <tr>
+        <td>علی رضایی</td>
+        <td>95</td>
+        <td>کامل</td>
+      </tr>
+      <tr>
+        <td>زهرا موسوی</td>
+        <td>88</td>
+        <td>80%</td>
+      </tr>
+    </table>
+  </section>  <script>
+    const content = {
+      fa: {
+        title: 'دوره تابستانه شهید نصرالله',
+        report: 'این بخش شامل خلاصه‌ای از فعالیت‌های انجام شده در دوره تابستانه شهید نصرالله است...',
+        scores: 'لیست امتیازات'
+      },
+      ar: {
+        title: 'الدورة الصيفیة الشهید نصرالله',
+        report: 'هذا القسم یحتوی علی ملخص النشاطات التی أُجریت خلال الدورة الصيفیة الشهید نصرالله...',
+        scores: 'قائمة النقاط'
+      }
+    };
 
-<header>
-  <!-- اگر لوگوی واقعی داری اینجا لینک عکسش را بگذار -->
-  <img src="" alt="لوگوی وام ازدواج" />
-</header>
-
-<h2>سامانه استعلام وضعیت وام ازدواج کوتی</h2>
-
-<input type="text" id="nationalId" placeholder="کد ملی را وارد کنید" maxlength="10" />
-<br />
-<button onclick="checkStatus()">استعلام وضعیت</button>
-
-<div id="result" class="result"></div>
-
-<footer>
-  ثبت نام وام ازدواج و فرزند آوری
-   <strong>کــوتی</strong><br />
-  نشانی: اهواز، نهضت آباد، انتهای خیابان انوشه، خیابان امت، دفتر ازدواج کوتی<br />
-  تلفن: ۰۹۱۶۹۰۸۴۰۶۰
-</footer>
-
-<script>
-  // داده شبیه‌سازی‌شده برای تست (کد ملی و وضعیت وام)
-  const loanData = {
-    "1746513276": "ثبت نام وام شما انجام شد بانک ملی شعبه نهضت آباد جهت تحویل مدارک به دفتر مزاجعه فرمایید",
-    "0098765432": "وام شما در مرحله بررسی مدارک است.",
-    "1234567890": "وام شما رد شده است.",
-    "9876543210": "وام شما هنوز ثبت نشده است."
-  };
-
-  function checkStatus() {
-    const id = document.getElementById('nationalId').value.trim();
-    const resultDiv = document.getElementById('result');
-    
-    // اعتبارسنجی اولیه کد ملی (فقط طول 10 رقم)
-    if (!/^\d{10}$/.test(id)) {
-      resultDiv.innerHTML = '<span class="error">لطفا کد ملی ۱۰ رقمی صحیح وارد کنید.</span>';
-      return;
+    function switchLang(lang) {
+      document.querySelector('header h1').innerText = content[lang].title;
+      document.querySelector('#report h2').innerText = lang === 'fa' ? 'گزارش دوره' : 'تقرير الدورة';
+      document.querySelector('#report p').innerText = content[lang].report;
+      document.querySelector('#scores h2').innerText = content[lang].scores;
     }
-
-    if (loanData[id]) {
-      resultDiv.textContent = loanData[id];
-    } else {
-      resultDiv.textContent = "کد ملی وارد شده در سیستم وام ازدواج ثبت نشده است.";
-    }
-  }
-</script>
-
-</body>
-</html># kouti
+  </script></body>
+</html>
